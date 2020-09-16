@@ -1,3 +1,16 @@
+
+<p align="center">Undangan Resepsi Pernikahan</p>
+
+## About this project
+Proyek ini adalah proyek individu yang bertujuan membuat portofolio.
+Requirements dari proyek ini adalah:
+- PHP 7.4.7
+- Composer <= 1.1o.13
+- Laravel 4.0.3
+- MongoDB ??
+Pemilihan dari requirements ini bukan berdasarkan kebutuhan dari alur cerita, namun berdasarkan rasa penasaran dan coba-coba
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
