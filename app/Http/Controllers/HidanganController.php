@@ -13,7 +13,7 @@ class HidanganController extends Controller
      */
     public function index()
     {
-        //
+        return view("hidangan.index");
     }
 
     /**
@@ -23,7 +23,7 @@ class HidanganController extends Controller
      */
     public function create()
     {
-        //
+        return view("hidangan.create");
     }
 
     /**
@@ -45,7 +45,7 @@ class HidanganController extends Controller
      */
     public function show($id)
     {
-        //
+        return view("hidangan.show");
     }
 
     /**
@@ -56,7 +56,7 @@ class HidanganController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("hidangan.edit");
     }
 
     /**
