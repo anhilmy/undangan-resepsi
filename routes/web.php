@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/test/{name?}', function ($name = "Jhon") {
+    return view('test', ["name" => $name]);
+});
+
 Route::get("auth/daftar", function () {
     return view("daftar");
 });
