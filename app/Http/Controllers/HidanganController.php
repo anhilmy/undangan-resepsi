@@ -36,8 +36,7 @@ class HidanganController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $this->_validateInput($request);
-        $this->_assignInputToHidangan($validatedData, new Hidangan)->save();
+        Hidangan::populateFromRequest($request)->save();
         return redirect("/mempelai/hidangan");
     }
 
@@ -72,9 +71,7 @@ class HidanganController extends Controller
      */
     public function update(Request $request, Hidangan $hidangan)
     {
-        $validatedData = $this->_validateInput($request);
-        $this->_assignInputToHidangan($validatedData, $hidangan)->save();
-
+        Hidangan::populateFromRequestWithObject($request, $hidangan)->save();
         return redirect("/mempelai/hidangan/" . $hidangan->id);
     }
 
@@ -87,24 +84,6 @@ class HidanganController extends Controller
     public function destroy(Hidangan $hidangan)
     {
         $hidangan->delete();
-
         return redirect("/mempelai/hidangan");
-    }
-
-    private function _validateInput(Request $request)
-    {
-        return $request->validate([
-            "nama" => 'required|max:50',
-            'deskripsi' => 'required',
-            'harga_per_porsi' => 'required|numeric'
-        ]);
-    }
-
-    private function _assignInputToHidangan(array $validatedData, Hidangan $hidangan)
-    {
-        $hidangan->nama = $validatedData["nama"];
-        $hidangan->deskripsi = $validatedData["deskripsi"];
-        $hidangan->harga_per_porsi = $validatedData["harga_per_porsi"];
-        return $hidangan;
     }
 }
