@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hidangan;
 use Illuminate\Http\Request;
 
 class HidanganController extends Controller
@@ -13,7 +14,8 @@ class HidanganController extends Controller
      */
     public function index()
     {
-        return view("hidangan.index");
+        $hidangans = Hidangan::latest()->paginate(15);
+        return view("hidangan.index", compact("hidangans"));
     }
 
     /**
@@ -34,51 +36,75 @@ class HidanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $this->_validateInput($request);
+        $this->_assignInputToHidangan($validatedData, new Hidangan)->save();
+        return redirect("/mempelai/hidangan");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Hidangan  $hidangan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Hidangan $hidangan)
     {
-        return view("hidangan.show");
+        return view("hidangan.show", compact("hidangan"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Hidangan  $hidangan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hidangan $hidangan)
     {
-        return view("hidangan.edit");
+        return view("hidangan.edit", compact("hidangan"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Hidangan  $hidangan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Hidangan $hidangan)
     {
-        //
+        $validatedData = $this->_validateInput($request);
+        $this->_assignInputToHidangan($validatedData, $hidangan)->save();
+
+        return redirect("/mempelai/hidangan/" . $hidangan->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Hidangan  $hidangan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Hidangan $hidangan)
     {
-        //
+        $hidangan->delete();
+
+        return redirect("/mempelai/hidangan");
+    }
+
+    private function _validateInput(Request $request)
+    {
+        return $request->validate([
+            "nama" => 'required|max:50',
+            'deskripsi' => 'required',
+            'harga_per_porsi' => 'required|numeric'
+        ]);
+    }
+
+    private function _assignInputToHidangan(array $validatedData, Hidangan $hidangan)
+    {
+        $hidangan->nama = $validatedData["nama"];
+        $hidangan->deskripsi = $validatedData["deskripsi"];
+        $hidangan->harga_per_porsi = $validatedData["harga_per_porsi"];
+        return $hidangan;
     }
 }
