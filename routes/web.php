@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HidanganController;
+use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,10 +43,6 @@ Route::get("admin/mempelai", function () {
     return view("edit-mempelai");
 });
 
-Route::get("mempelai/kategori", function () {
-    return view("kategori");
-});
-
 Route::get("mempelai/lokasi", function () {
     return view("lokasi");
 });
@@ -55,3 +52,4 @@ Route::get("mempelai/laporan", function () {
 });
 
 Route::resource("mempelai/hidangan", HidanganController::class);
+Route::resource("mempelai/kategori", KategoriController::class);
