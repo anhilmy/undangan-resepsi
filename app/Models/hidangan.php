@@ -14,8 +14,8 @@ class Hidangan extends Model
     {
         return $request->validate([
             "nama" => 'required|max:50',
-            'deskripsi' => 'required',
-            'harga_per_porsi' => 'required|numeric'
+            'deskripsi' => 'required|max:255',
+            'harga_per_porsi' => 'required|numeric|min:0'
         ]);
     }
 
@@ -26,7 +26,7 @@ class Hidangan extends Model
 
     public static function populateFromRequestWithObject(Request $request, Hidangan $hidangan)
     {
-        $validatedData = self::validateInput($request);
+        $validatedData = self::validateRequest($request);
         $hidangan->nama = $validatedData["nama"];
         $hidangan->deskripsi = $validatedData["deskripsi"];
         $hidangan->harga_per_porsi = $validatedData["harga_per_porsi"];
