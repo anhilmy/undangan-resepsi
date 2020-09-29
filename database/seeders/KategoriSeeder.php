@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hidangan;
+use App\Models\Kategori;
 use Illuminate\Database\Seeder;
 
-class HidanganSeeder extends Seeder
+class KategoriSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class HidanganSeeder extends Seeder
      */
     public function run()
     {
-        Hidangan::factory()->times(50)->create();
+        Kategori::factory()->times(4)->create();
     }
 }

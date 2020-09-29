@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hidangan;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
-class HidanganController extends Controller
+class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class HidanganController extends Controller
      */
     public function index()
     {
-        $hidangans = Hidangan::latest()->paginate(15);
-        return view("hidangan.index", compact("hidangans"));
+        $kategoris = Kategori::latest()->paginate(15);
+        return view("kategori.index", compact("kategoris"));
+        //
     }
 
     /**
@@ -25,7 +26,7 @@ class HidanganController extends Controller
      */
     public function create()
     {
-        return view("hidangan.create");
+        return view("kategori.create");
     }
 
     /**
@@ -36,54 +37,54 @@ class HidanganController extends Controller
      */
     public function store(Request $request)
     {
-        Hidangan::populateFromRequest($request)->save();
-        return redirect("/mempelai/hidangan");
+        Kategori::populateFromRequest($request)->save();
+        return redirect("/mempelai/kategori");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Hidangan  $hidangan
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function show(Hidangan $hidangan)
+    public function show(Kategori $kategori)
     {
-        return view("hidangan.show", compact("hidangan"));
+        return view("kategori.show", compact("kategori"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Hidangan  $hidangan
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hidangan $hidangan)
+    public function edit(Kategori $kategori)
     {
-        return view("hidangan.edit", compact("hidangan"));
+        return view("kategori.edit", compact("kategori"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hidangan  $hidangan
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hidangan $hidangan)
+    public function update(Request $request, Kategori $kategori)
     {
-        Hidangan::populateFromRequestWithObject($request, $hidangan)->save();
-        return redirect("/mempelai/hidangan/" . $hidangan->id);
+        Kategori::populateFromRequestWithObject($request, $kategori)->save();
+        return redirect("/mempelai/kategori/" . $kategori->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Hidangan  $hidangan
+     * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hidangan $hidangan)
+    public function destroy(Kategori $kategori)
     {
-        $hidangan->delete();
-        return redirect("/mempelai/hidangan");
+        $kategori->delete();
+        return redirect("/mempelai/kategori");
     }
 }
